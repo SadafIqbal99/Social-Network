@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialNet Demo - Connect Instantly</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main App Page - No Login Required -->
+    <div id="appPage" class="page active">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-left">
+                    <h2 class="logo"><i class="fas fa-users"></i> SocialNet Demo</h2>
+                </div>
+                
+                <div class="nav-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search SocialNet" id="searchInput">
+                </div>
+                
+                <div class="nav-right">
+                    <a href="#" class="nav-link active" onclick="showFeed()">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showFriends()">
+                        <i class="fas fa-user-friends"></i>
+                        <span class="badge" id="friendRequestBadge">3</span>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationBadge">5</span>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showMessages()">
+                        <i class="fas fa-comment"></i>
+                        <span class="badge">2</span>
+                    </a>
+                    <div class="nav-profile" onclick="showProfile()">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Profile" id="navProfilePic">
+                        <span id="navUsername">Alex Morgan</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Container -->
+        <div class="main-container">
+            <!-- Sidebar Left -->
+            <div class="sidebar-left">
+                <div class="profile-card">
+                    <div class="profile-cover">
+                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400" alt="Cover">
+                    </div>
+                    <div class="profile-info">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Profile" id="sidebarProfilePic">
+                        <h3 id="sidebarName">Alex Morgan</h3>
+                        <p id="sidebarBio">Digital Creator & Photography Enthusiast 📸</p>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="postCount">124</span>
+                            <span class="stat-label">Posts</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="friendCount">458</span>
+                            <span class="stat-label">Friends</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="followerCount">1.2k</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card">
+                    <a href="#" class="menu-item active" onclick="showFeed()">
+                        <i class="fas fa-newspaper"></i> News Feed
+                    </a>
+                    <a href="#" class="menu-item" onclick="showMessenger()">
+                        <i class="fas fa-comment-dots"></i> Messenger
+                    </a>
+                    <a href="#" class="menu-item" onclick="showFriends()">
+                        <i class="fas fa-user-friends"></i> Friends
+                    </a>
+                    <a href="#" class="menu-item" onclick="showSaved()">
+                        <i class="fas fa-bookmark"></i> Saved
+                    </a>
+                    <a href="#" class="menu-item" onclick="showEvents()">
+                        <i class="fas fa-calendar"></i> Events
+                    </a>
+                    <a href="#" class="menu-item" onclick="showGroups()">
+                        <i class="fas fa-users"></i> Groups
+                    </a>
+                    <a href="#" class="menu-item" onclick="showMarketplace()">
+                        <i class="fas fa-store"></i> Marketplace
+                    </a>
+                    <a href="#" class="menu-item" onclick="showSettings()">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </div>
+
+                <div class="shortcuts-card">
+                    <h3>Your Shortcuts</h3>
+                    <a href="#" class="shortcut-item">
+                        <i class="fas fa-code"></i> Developer Community
+                    </a>
+                    <a href="#" class="shortcut-item">
+                        <i class="fas fa-camera"></i> Photography Tips
+                    </a>
+                    <a href="#" class="shortcut-item">
+                        <i class="fas fa-music"></i> Music Lovers
+                    </a>
+                    <a href="#" class="shortcut-item">
+                        <i class="fas fa-gamepad"></i> Gaming Hub
+                    </a>
+                </div>
+            </div>
+
+            <!-- Feed Content -->
+            <div class="content-area" id="feedView">
+                <!-- Create Post -->
+                <div class="create-post-card">
+                    <div class="post-input">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Profile" id="postProfilePic">
+                        <input type="text" placeholder="What's on your mind, Alex?" id="postContent">
+                    </div>
+                    <div class="post-actions">
+                        <button class="post-action-btn" onclick="openMediaUpload()">
+                            <i class="fas fa-image"></i> Photo
+                        </button>
+                        <button class="post-action-btn" onclick="openVideoUpload()">
+                            <i class="fas fa-video"></i> Video
+                        </button>
+                        <button class="post-action-btn" onclick="openFeeling()">
+                            <i class="fas fa-smile"></i> Feeling
+                        </button>
+                        <button class="post-btn" onclick="createPost()">Post</button>
+                    </div>
+                </div>
+
+                <!-- Stories Section -->
+                <div class="stories-section">
+                    <h3>Stories</h3>
+                    <div class="stories-container">
+                        <div class="story-card create-story">
+                            <div class="story-cover">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <span>Create Story</span>
+                        </div>
+                        <div class="story-card">
+                            <img src="https://images.unsplash.com/photo-1494790108777-296fd3c7e5e0?w=150" alt="Story" class="story-user">
+                            <div class="story-preview" style="background-image: url('https://images.unsplash.com/photo-1516642899173-2a3a4a9a6c9e?w=200')"></div>
+                            <span>Emma Watson</span>
+                        </div>
+                        <div class="story-card">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150" alt="Story" class="story-user">
+                            <div class="story-preview" style="background-image: url('https://images.unsplash.com/photo-1516685018640-af97860a5c4d?w=200')"></div>
+                            <span>James Chen</span>
+                        </div>
+                        <div class="story-card">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150" alt="Story" class="story-user">
+                            <div class="story-preview" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200')"></div>
+                            <span>Sarah Johnson</span>
+                        </div>
+                        <div class="story-card">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150" alt="Story" class="story-user">
+                            <div class="story-preview" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=200')"></div>
+                            <span>Mike Peters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Posts Feed -->
+                <div id="postsContainer"></div>
+            </div>
+
+            <!-- Friends View -->
+            <div class="content-area" id="friendsView" style="display: none;">
+                <div class="section-header">
+                    <h2>Friends</h2>
+                    <div class="friend-tabs">
+                        <button class="tab-btn active" onclick="showAllFriends()">All Friends</button>
+                        <button class="tab-btn" onclick="showFriendRequests()">Requests <span id="requestCount">3</span></button>
+                        <button class="tab-btn" onclick="showSuggestions()">Suggestions</button>
+                    </div>
+                </div>
+                <div id="friendsContainer" class="friends-grid"></div>
+            </div>
+
+            <!-- Notifications View -->
+            <div class="content-area" id="notificationsView" style="display: none;">
+                <div class="section-header">
+                    <h2>Notifications</h2>
+                    <button class="mark-read-btn" onclick="markAllAsRead()">Mark all as read</button>
+                </div>
+                <div id="notificationsContainer" class="notifications-list"></div>
+            </div>
+
+            <!-- Messages View -->
+            <div class="content-area" id="messagesView" style="display: none;">
+                <div class="messages-container">
+                    <div class="conversations-list">
+                        <div class="messages-header">
+                            <h3>Chats</h3>
+                            <button class="new-chat-btn" onclick="newChat()">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="conversationsList" class="conversations"></div>
+                    </div>
+                    <div class="chat-area">
+                        <div id="chatHeader" class="chat-header">
+                            <div class="chat-user-info">
+                                <img src="https://images.unsplash.com/photo-1494790108777-296fd3c7e5e0?w=50" alt="User">
+                                <div>
+                                    <h4>Emma Watson</h4>
+                                    <span class="online-status online"></span> Online
+                                </div>
+                            </div>
+                            <div class="chat-actions">
+                                <button><i class="fas fa-phone"></i></button>
+                                <button><i class="fas fa-video"></i></button>
+                                <button><i class="fas fa-info-circle"></i></button>
+                            </div>
+                        </div>
+                        <div id="chatMessages" class="chat-messages">
+                            <div class="message received">
+                                <img src="https://images.unsplash.com/photo-1494790108777-296fd3c7e5e0?w=50" alt="Emma">
+                                <div class="message-content">
+                                    <p>Hey! How's it going?</p>
+                                    <span class="message-time">10:30 AM</span>
+                                </div>
+                            </div>
+                            <div class="message sent">
+                                <div class="message-content">
+                                    <p>Great! Just working on some photos</p>
+                                    <span class="message-time">10:32 AM</span>
+                                </div>
+                            </div>
+                            <div class="message received">
+                                <img src="https://images.unsplash.com/photo-1494790108777-296fd3c7e5e0?w=50" alt="Emma">
+                                <div class="message-content">
+                                    <p>Awesome! Can't wait to see them</p>
+                                    <span class="message-time">10:33 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input" id="chatInputArea">
+                            <button class="attach-btn"><i class="fas fa-paperclip"></i></button>
+                            <button class="emoji-btn"><i class="fas fa-smile"></i></button>
+                            <input type="text" placeholder="Type a message..." id="messageInput">
+                            <button class="send-btn" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile View -->
+            <div class="content-area" id="profileView" style="display: none;">
+                <div class="profile-header">
+                    <div class="profile-cover-photo">
+                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200" alt="Cover">
+                        <button class="edit-cover-btn" onclick="editCover()">
+                            <i class="fas fa-camera"></i> Edit Cover
+                        </button>
+                    </div>
+                    <div class="profile-info-area">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Profile" id="profilePic">
+                        <div class="profile-name-area">
+                            <h1 id="profileName">Alex Morgan</h1>
+                            <p id="profileBio">Digital Creator & Photography Enthusiast 📸</p>
+                            <div class="profile-meta">
+                                <span><i class="fas fa-briefcase"></i> Creative Director at PixelPerfect</span>
+                                <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                                <span><i class="fas fa-heart"></i> Married</span>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="profile-action-btn primary" onclick="addToStory()">
+                                <i class="fas fa-plus-circle"></i> Add to Story
+                            </button>
+                            <button class="profile-action-btn" onclick="editProfile()">
+                                <i class="fas fa-edit"></i> Edit Profile
+                            </button>
+                            <button class="profile-action-btn" onclick="showMoreOptions()">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="profile-tabs">
+                        <button class="profile-tab active" onclick="showProfilePosts()">Posts</button>
+                        <button class="profile-tab" onclick="showProfileAbout()">About</button>
+                        <button class="profile-tab" onclick="showProfileFriends()">Friends</button>
+                        <button class="profile-tab" onclick="showProfilePhotos()">Photos</button>
+                        <button class="profile-tab" onclick="showProfileVideos()">Videos</button>
+                        <button class="profile-tab" onclick="showProfileMore()">More</button>
+                    </div>
+                    
+                    <div class="profile-about-section" id="profileAbout" style="display: none;">
+                        <div class="about-card">
+                            <h3>About</h3>
+                            <div class="about-item">
+                                <i class="fas fa-briefcase"></i>
+                                <div>
+                                    <h4>Work</h4>
+                                    <p>Creative Director at PixelPerfect</p>
+                                </div>
+                            </div>
+                            <div class="about-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div>
+                                    <h4>Education</h4>
+                                    <p>Stanford University</p>
+                                </div>
+                            </div>
+                            <div class="about-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Lives in</h4>
+                                    <p>San Francisco, California</p>
+                                </div>
+                            </div>
+                            <div class="about-item">
+                                <i class="fas fa-heart"></i>
+                                <div>
+                                    <h4>Relationship</h4>
+                                    <p>Married to Sarah Johnson</p>
+                                </div>
+                            </div>
+                            <div class="about-item">
+                                <i class="fas fa-birthday-cake"></i>
+                                <div>
+                                    <h4>Born on</h4>
+                                    <p>March 15, 1990</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="profilePostsContainer"></div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="sidebar-right">
+                <div class="suggestions-card">
+                    <div class="card-header">
+                        <h3>People You May Know</h3>
+                        <a href="#" onclick="showAllSuggestions()">See All</a>
+                    </div>
+                    <div id="suggestionsContainer"></div>
+                </div>
+                
+                <div class="online-friends-card">
+                    <div class="card-header">
+                        <h3>Online Friends</h3>
+                        <span class="online-count" id="onlineCount">12 online</span>
+                    </div>
+                    <div id="onlineFriendsContainer"></div>
+                </div>
+
+                <div class="trending-card">
+                    <h3>Trending Today</h3>
+                    <div class="trending-item">
+                        <span class="trending-rank">1</span>
+                        <div class="trending-content">
+                            <h4>#SunsetPhotography</h4>
+                            <p>2.5k posts</p>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <span class="trending-rank">2</span>
+                        <div class="trending-content">
+                            <h4>#TechConference2024</h4>
+                            <p>1.8k posts</p>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <span class="trending-rank">3</span>
+                        <div class="trending-content">
+                            <h4>#WeekendVibes</h4>
+                            <p>1.2k posts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="postModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('postModal')">&times;</span>
+                <h3>Create Post</h3>
+                <div class="modal-user-info">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50" alt="User">
+                    <span>Alex Morgan</span>
+                </div>
+                <textarea id="modalPostContent" placeholder="What's on your mind?" rows="6"></textarea>
+                <div class="modal-actions">
+                    <button class="modal-btn" onclick="addPhoto()">
+                        <i class="fas fa-camera"></i> Photo
+                    </button>
+                    <button class="modal-btn" onclick="addVideo()">
+                        <i class="fas fa-video"></i> Video
+                    </button>
+                    <button class="modal-btn" onclick="addFeeling()">
+                        <i class="fas fa-smile"></i> Feeling
+                    </button>
+                    <button class="modal-btn" onclick="addLocation()">
+                        <i class="fas fa-map-marker-alt"></i> Location
+                    </button>
+                </div>
+                <div class="post-settings">
+                    <select class="privacy-select">
+                        <option value="public">🌎 Public</option>
+                        <option value="friends">👥 Friends</option>
+                        <option value="private">🔒 Only me</option>
+                    </select>
+                </div>
+                <button class="post-submit-btn" onclick="submitPost()">Post</button>
+            </div>
+        </div>
+
+        <div id="commentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('commentModal')">&times;</span>
+                <h3>Comments</h3>
+                <div id="commentsContainer" class="comments-container"></div>
+                <div class="add-comment">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40" alt="You">
+                    <input type="text" id="commentInput" placeholder="Write a comment...">
+                    <button onclick="addComment()">Post</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mediaViewer" class="modal">
+            <div class="modal-content media-viewer">
+                <span class="close" onclick="closeModal('mediaViewer')">&times;</span>
+                <img src="" alt="Media" id="mediaViewerImage">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
